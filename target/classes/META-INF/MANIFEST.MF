@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: invictus-crm
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: hds6
+Implementation-Vendor-Id: com.invictus.crm
+Build-Jdk: 1.8.0_111
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/invictus-crm
+Created-By: Maven Integration for Eclipse
+
