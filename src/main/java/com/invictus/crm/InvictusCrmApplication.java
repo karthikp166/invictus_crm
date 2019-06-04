@@ -10,7 +10,6 @@ public class InvictusCrmApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvictusCrmApplication.class, args);
-
 	}
-
+	
 }
