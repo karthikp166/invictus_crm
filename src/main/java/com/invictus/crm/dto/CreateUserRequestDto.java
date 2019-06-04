@@ -1,17 +1,23 @@
 package com.invictus.crm.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class CreateUserRequestDto {
 
+	@NotEmpty(message = "userName is mandatory")
 	private String userName;
 	
+	@NotEmpty(message = "password is mandatory")
 	private String password;
 	
+	@NotEmpty(message = "firstName is mandatory")
 	private String firstName;
 	
 	private String lastName;
 	
 	private String email;
 	
+	@NotEmpty(message = "Role is mandatory")
 	private String role;
 
 	public String getUserName() {

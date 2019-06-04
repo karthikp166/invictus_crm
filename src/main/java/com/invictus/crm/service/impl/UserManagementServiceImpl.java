@@ -4,6 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -27,18 +32,27 @@ public class UserManagementServiceImpl implements UserManagementService {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
-	public void createRole(CreateRoleRequestDto createRoleRequest) {		
+	public void createRole(CreateRoleRequestDto createRoleRequest) {	
+		log.info("UserManagementController >> createRole() >> started");
+		if(null!= getRoleByName(createRoleRequest.getRoleName()))
+			throw new BadRequestException("Role already exists.");
 		roleRepository.save(prepareCreateRoleRequest(createRoleRequest));
 	}
 
 	@Override
 	public void createUser(CreateUserRequestDto createUserRequest) {
+		log.info("UserManagementController >> createUser() >> started");
+		if(null != userRepository.getUserDetails(createUserRequest.getUserName()))
+			throw new BadRequestException("User already exists.");		
 		userRepository.save(prepareCreateUserRequest(createUserRequest));
 	}
 
 	@Override
 	public UserRolesResponseDto getUserRoles() {
+		log.info("UserManagementController >> getUserRoles() >> started");
 		List<Role> roles = roleRepository.getRoles();
 		UserRolesResponseDto responseDto = new UserRolesResponseDto();
 		if(!CollectionUtils.isEmpty(roles)) {
@@ -49,7 +63,10 @@ public class UserManagementServiceImpl implements UserManagementService {
 	
 	@Override
 	public GetUserDetailsResponseDto getUserDetails(String userName) {
+		log.info("UserManagementController >> getUserDetails() >> started");
 		User userEntity = userRepository.getUserDetails(userName);
+		if(null == userEntity)
+			throw new NotFoundException("user doesnt exists.");
 		return prepareUserDetailsResponse(userEntity);
 	}
 	

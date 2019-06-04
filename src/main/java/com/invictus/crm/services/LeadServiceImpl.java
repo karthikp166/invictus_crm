@@ -5,11 +5,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.invictus.crm.controller.LeadController;
 import com.invictus.crm.dao.LeadDAO;
 import com.invictus.crm.model.Lead;
 
+@Service
 public class LeadServiceImpl implements LeadService {
 
 	private static final Logger logger = LoggerFactory.getLogger(LeadServiceImpl.class);
